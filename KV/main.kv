@@ -1,0 +1,58 @@
+#: include KV/perguntas.kv
+#: include KV/creditos.kv
+#: include KV/instrucao.kv
+
+MDScreenManager:
+    MDScreen:
+        name: "tela_inicio"
+        MDFloatLayout:
+            MDBoxLayout
+                pos_hint: {"center_x": .5, "center_y": .7}
+                size_hint: .7, .3
+
+                canvas:
+                    Color:
+                        rgb: 153/255, 153/255, 255/255, 1
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: 50,50,50,50
+
+            MDLabel:
+                text: "Teste de\n Personalidade Empresarial"
+                halign: "center"
+                font_size: 28
+                pos_hint: {"center_x": .5, "center_y": .7}
+                size_hint: 1, 0.3
+
+            MDFillRoundFlatButton:
+                text: "Iniciar Teste"
+                md_bg_color: "#9999ff"
+                text_color: "black"
+                font_size: 24
+                pos_hint: {"center_x": .3, "center_y": .3}
+                size_hint: .2, 0.10
+                on_release:
+                    app.mudar_tela("instrucao")
+
+            MDFillRoundFlatButton:
+                text: "Créditos"
+                md_bg_color: "#9999ff"
+                text_color: "black"
+                font_size: 24
+                pos_hint: {"center_x": .7, "center_y": .3}
+                size_hint: .2, 0.10
+                on_release: root.current = "creditos"
+
+    Perguntas:
+        name: "perguntas"
+
+    Creditos:
+        name: "creditos"
+
+    Instrucao:
+        name: "instrucao"
+
+
+
+

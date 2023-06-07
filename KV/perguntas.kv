@@ -1,0 +1,68 @@
+<Perguntas>:
+    MDFloatLayout:
+        MDBoxLayout
+            id: box
+            pos_hint: {"center_x": .5, "center_y": .6}
+            size_hint: .8, .6
+            canvas:
+                Color:
+                    rgb: 153/255, 153/255, 255/255, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: 50,50,50,50
+
+            MDLabel:
+                id: label_perguntas
+                text: ""
+                font_size: 24
+                halign: "center"
+                size: self.size
+
+        MDFillRoundFlatButton:
+            text: "1"
+            md_bg_color: "#9999ff"
+            text_color: "black"
+            font_size: 30
+            pos_hint: {"center_x": .1, "center_y": .2}
+            size_hint: .15, .1
+            on_release:
+                app.resposta.append(1)
+                app.perguntas()
+
+        MDFillRoundFlatButton:
+            text: "2"
+            md_bg_color: "#9999ff"
+            text_color: "black"
+            font_size: 30
+            pos_hint: {"center_x": .3, "center_y": .2}
+            size_hint: .15, .1
+            on_release: print("2")
+
+        MDFillRoundFlatButton:
+            text: "3"
+            md_bg_color: "#9999ff"
+            text_color: "black"
+            font_size: 30
+            pos_hint: {"center_x": .5, "center_y": .2}
+            size_hint: .15, .1
+            on_release: print("3")
+
+        MDFillRoundFlatButton:
+            text: "4"
+            md_bg_color: "#9999ff"
+            text_color: "black"
+            font_size: 30
+            pos_hint: {"center_x": .7, "center_y": .2}
+            size_hint: .15, .1
+            on_release: print("4")
+
+        MDFillRoundFlatButton:
+            text: "5"
+            md_bg_color: "#9999ff"
+            text_color: "black"
+            font_size: 30
+            pos_hint: {"center_x": .9, "center_y": .2}
+            size_hint: .15, .1
+            on_release: print("5")
+

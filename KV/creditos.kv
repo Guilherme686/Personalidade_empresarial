@@ -1,0 +1,27 @@
+<Creditos@MDScreen>:
+    MDFloatLayout:
+
+        MDLabel:
+            text: "Tela de Creditos"
+            pos_hint: {"center_x": .5, "center_y": .5}
+            halign: "center"
+
+        Widget:
+            pos_hint: {"center_x": .5, "center_y": 0}
+            size_hint: 1, .2
+            canvas:
+                Color:
+                    rgb: 153/255, 153/255, 255/255, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+        MDIconButton:
+            icon: "home"
+            icon_size: "50sp"
+            theme_icon_color: "Custom"
+            icon_color: "white"
+            md_bg_color: "#9966ff"
+            pos_hint: {"center_x": .5, "center_y": .1}
+            on_release: app.root.current = "tela_inicio"
+
