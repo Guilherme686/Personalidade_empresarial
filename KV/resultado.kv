@@ -1,0 +1,15 @@
+<Resultado>:
+    MDFloatLayout:
+        FitImage:
+            id: img
+            size_hint: .9, .4
+            pos_hint: {"center_x": .5,"center_y": .5}
+
+        MDFillRoundFlatButton:
+            text: "Refazer o teste"
+            md_bg_color: "#99ccff"
+            text_color: "black"
+            font_size: app.dados["font"]
+            pos_hint: {"center_x": .5, "center_y": .15}
+            size_hint: .15, .1
+            on_release: app.mudar_tela("tela_inicio")

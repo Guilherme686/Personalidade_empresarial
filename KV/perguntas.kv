@@ -1,5 +1,6 @@
 <Perguntas>:
     MDFloatLayout:
+        id: float
         MDBoxLayout
             id: box
             pos_hint: {"center_x": .5, "center_y": .6}
@@ -15,54 +16,77 @@
             MDLabel:
                 id: label_perguntas
                 text: ""
-                font_size: 24
+                font_size: app.dados["font"] + 10
                 halign: "center"
                 size: self.size
 
         MDFillRoundFlatButton:
+            id: um
             text: "1"
             md_bg_color: "#9999ff"
             text_color: "black"
-            font_size: 30
+            font_size: app.dados["font"] + 10
             pos_hint: {"center_x": .1, "center_y": .2}
-            size_hint: .15, .1
+            size_hint: .15, .08
             on_release:
-                app.resposta.append(1)
-                app.perguntas()
+                root.altera_texto()
+                app.respostas.append(1)
 
         MDFillRoundFlatButton:
+            id: dois
             text: "2"
             md_bg_color: "#9999ff"
             text_color: "black"
-            font_size: 30
+            font_size: app.dados["font"] + 10
             pos_hint: {"center_x": .3, "center_y": .2}
-            size_hint: .15, .1
-            on_release: print("2")
+            size_hint: .15, .08
+            on_release:
+                root.altera_texto()
+                app.respostas.append(2)
 
         MDFillRoundFlatButton:
+            id: tres
             text: "3"
             md_bg_color: "#9999ff"
             text_color: "black"
-            font_size: 30
+            font_size: app.dados["font"] + 10
             pos_hint: {"center_x": .5, "center_y": .2}
-            size_hint: .15, .1
-            on_release: print("3")
+            size_hint: .15, .08
+            on_release:
+                root.altera_texto()
+                app.respostas.append(3)
 
         MDFillRoundFlatButton:
+            id: quatro
             text: "4"
             md_bg_color: "#9999ff"
             text_color: "black"
-            font_size: 30
+            font_size: app.dados["font"] + 10
             pos_hint: {"center_x": .7, "center_y": .2}
-            size_hint: .15, .1
-            on_release: print("4")
+            size_hint: .15, .08
+            on_release:
+                root.altera_texto()
+                app.respostas.append(4)
 
         MDFillRoundFlatButton:
+            id: cinco
             text: "5"
             md_bg_color: "#9999ff"
             text_color: "black"
-            font_size: 30
+            font_size: app.dados["font"] + 10
             pos_hint: {"center_x": .9, "center_y": .2}
+            size_hint: .15, .08
+            on_release:
+                root.altera_texto()
+                app.respostas.append(5)
+
+        MDFillRoundFlatButton:
+            id: computar
+            text: "Computar resultado"
+            md_bg_color: "#99ccff"
+            text_color: "black"
+            font_size: app.dados["font"] + 10
+            pos_hint: {"center_x": 1.5, "center_y": .6}
             size_hint: .15, .1
-            on_release: print("5")
+            on_release: app.mudar_tela("resultado")
 

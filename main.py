@@ -1,22 +1,11 @@
-""" Este programa calculará seu perfil empreendedor com base um 30 perguntas
-e depois montará um gráfico de radar. Futuramente este programa se tornará um app
-"""
-
-import matplotlib.pyplot as plt
-import numpy as np
 from kivymd.app import MDApp
 from kivy.lang import Builder
-from kivy.core.window import Window
-from kivymd.uix.screenmanager import MDScreenManager
+import matplotlib.pyplot as plt
+import numpy as np
 from kivymd.uix.screen import MDScreen
-from kivymd.uix.button import MDFillRoundFlatButton
 
-Window.size = 400,600
 
 class Creditos(MDScreen):
-    pass
-
-class Main(MDScreenManager):
     pass
 
 class Instrucao(MDScreen):
@@ -59,79 +48,52 @@ class Perguntas(MDScreen):
     contador = 0
 
     def altera_texto(self):
-
+        lista_botoes = ["um", "dois", "tres", "quatro", "cinco"]
         if self.contador < (len(self.lista_perguntas) - 1):
             self.contador += 1
             self.ids.label_perguntas.text = self.lista_perguntas[self.contador]
 
         else:
-            self.clear_widgets()
-            self.add_widget(MDFillRoundFlatButton(
-                text="Computar resultado",
-                pos_hint={"center_x":.5, "center_y":.5},
-                size_hint=(.3, .1),
-                on_release = lambda x: tela.ids.gerenciador.next()
-                ))
+            self.ids.label_perguntas.text = ""
+            for i in lista_botoes:
+                self.ids[i].pos_hint = {"center_x": 1.5, "center_y": 1.5}
+
+            self.ids.computar.pos_hint = {"center_x": .5, "center_y": .6}
 
 
-# class TelaDados(MDScreen):
-#     def perguntas(self, resposta):
-#         index = int(self.ids['pergunta'].text[:2])
-#         if (index + 1) == 31:
-#             self.respostas.append(resposta)
-#             self.manager.current = TelaFinal().name
-#         else:
-#             self.ids['pergunta'].text = str(int(self.ids['pergunta'].text[:2]) + 1) + ' )' + ' ' + perguntas[int(self.ids['pergunta'].text[:2])]
-#
-#             #Respostas do usuário
-#             if index == 1:
-#                 self.respostas = []
-#                 self.respostas.append(resposta)
-#             else:
-#                 self.respostas.append(resposta)
-#             self.manager.current = TelaDados().name
-#     pass
-#
-#     def soma(self):
-#         # somas = [(self.respostas[0] + self.respostas[10] + self.respostas[20]), (self.respostas[9] + self.respostas[19] + self.respostas[21]),
-#         #          (self.respostas[8] + self.respostas[18] + self.respostas[22]), (self.respostas[7] + self.respostas[17] + self.respostas[23]),
-#         #          (self.respostas[6] + self.respostas[16] + self.respostas[24]), (self.respostas[5] + self.respostas[15] + self.respostas[25]),
-#         #          (self.respostas[4] + self.respostas[14] + self.respostas[26]), (self.respostas[3] + self.respostas[13] + self.respostas[27]),
-#         #          (self.respostas[2] + self.respostas[12] + self.respostas[28]), (self.respostas[1] + self.respostas[11] + self.respostas[29])]
-#         #
-#         # apura = ["Busca de oportunidades e iniciativa", "Persistência", "Comprometimento",
-#         #          "Exigência de Qualidade e eficiência", "Correr riscos calculados", "Estabelecimento de metas",
-#         #          "Busca de informação", "Planejamento e monitoramento sistemático", "Persuasão de rede de contatos",
-#         #          "independência e autoconfiança"]
-#         #
-#         # table = pd.DataFrame(dict(r=somas, theta=apura))
-#         # fig = px.line_polar(table, r='r', theta='theta', line_close=True)
-#         # fig.show()
-#         # time.sleep(5)
-#         # Personalidade().stop()
-#         pass
 
+class main(MDApp):
 
-class Personalidade(MDApp):
+    dados = {"font": 30}
 
-    resposta = []
+    respostas = []
+
+    texto_instrucao = ''' 
+    O teste de Personalidade Empresarial é um teste autoavaliativo, portanto é crucial que todas as perguntas sejam respondidas em concordância com seus hábitos e personalidade.
+    \n Para cada pergunta você terá 5 opções de resposta numeradas de 1 á 5 sendo, 1 como "não me identifico" e 5 como "me identifico totalmente".
+    \n Ao final do teste seu resultado será computado e apresentado em um gráfico de radar.'''
 
     def build(self):
         return Builder.load_file("KV/main.kv")
 
     def mudar_tela(self, nome):
+        gerenciador = self.root.ids.gerenciador
+
         if nome == "instrucao":
-            self.root.ids.gerenciador.screens[3].ids.text_instr.text = ''' O teste de Personalidade Empresarial é um teste autoavaliativo, portanto é crucial que todas as perguntas sejam respondidas em concordância com seus hábitos e personalidade.\n\n Para cada pergunta você terá 5 opções de resposta numeradas de 1 á 5 sendo, 1 como "não me identifico" e 5 como "me identifico totalmente".\n\n Ao final do teste seu resultado será computado e apresentado em um gráfico de radar.'''
-            self.root.ids.gerenciador.current = nome
+            gerenciador.screens[3].ids.text_instr.text = self.texto_instrucao
 
         elif nome == "perguntas":
-            self.root.ids.gerenciador.current = nome
-            self.root.ids.gerenciador.screens[1].ids.label_perguntas.text = "Faço as coisas antes de solicitado ou antes de forçado pelas circustâncias "
+            gerenciador.screens[1].ids.label_perguntas.text = Perguntas().lista_perguntas[0]
 
         elif nome == "resultado":
-            print()
+            print(self.respostas)
+            self.montar_grafico_radar()
+
+        gerenciador.current = nome
 
     def montar_grafico_radar(self):
+        gerenciador = self.root.ids.gerenciador
+
         cat = ["Busca de oportunidades\n e iniciativa", "Persistência", "Comprometimento",
                "Exigência de\n Qualidade\n e eficiência", "Correr riscos calculados", "Estabelecimento de metas",
                "Busca de informação", "Planejamento e\n monitoramento\n sistemático", "Persuasão de\n rede de contatos",
@@ -200,11 +162,10 @@ class Personalidade(MDApp):
             # ax.text(ângulo, distância do centro, texto, tamanho, alinhamento horizontal, alinhamento vertical)
             ax.text(angle_rad, 15 + distance_ax, cat[i], size=12, horizontalalignment=ha, verticalalignment="center")
 
-        # plt.savefig("fig1.png")
-        plt.show()
-        # plt.close()
+        plt.savefig("resultado.png")
+        #plt.show()
+        gerenciador.screens[4].ids.img.source = "resultado.png"
+        gerenciador.screens[4].ids.img.reload()
 
 
-
-Personalidade().run()
-
+main().run()

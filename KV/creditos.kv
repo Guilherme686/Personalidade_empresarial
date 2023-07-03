@@ -1,10 +1,16 @@
-<Creditos@MDScreen>:
+<Creditos>:
     MDFloatLayout:
 
         MDLabel:
-            text: "Tela de Creditos"
-            pos_hint: {"center_x": .5, "center_y": .5}
+            text: "Este é um teste desenvolvido pelo:"
+            font_size: 30
+            pos_hint: {"center_x": .5, "center_y": .9}
             halign: "center"
+
+        FitImage:
+            source: "logo_sebrae.png"
+            size_hint: .95, .35
+            pos_hint: {"center_x": .5, "center_y": .5}
 
         Widget:
             pos_hint: {"center_x": .5, "center_y": 0}
@@ -23,5 +29,5 @@
             icon_color: "white"
             md_bg_color: "#9966ff"
             pos_hint: {"center_x": .5, "center_y": .1}
-            on_release: app.root.current = "tela_inicio"
+            on_release: app.root.ids.gerenciador.current = "tela_inicio"
 
