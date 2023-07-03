@@ -1,4 +1,4 @@
 # Personalidade_empresarial
-Aplicativo para avaliar sua personalidade empresarial baseado no teste do Senai
+Aplicativo para avaliar sua personalidade empresarial baseado no teste do Sebrae
 
-Falta trata implementar a tela que precedirá o tela do gráfico e a tela do gráfico
+Falta apenas configurar melhor as dimenções dos widget na tela (vide Proximo_passos.txt)
